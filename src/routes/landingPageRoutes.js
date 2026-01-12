@@ -6,7 +6,7 @@ import express from "express";
 const router = express.Router();
 
 router.get("/", viewHomePage);
-router.get("/about.html", viewAboutPage);
+router.get("/about", viewAboutPage);
 
 
 

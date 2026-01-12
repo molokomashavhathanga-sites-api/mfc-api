@@ -1,0 +1,119 @@
+body {
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(13, 110, 253, .12), transparent),
+        radial-gradient(900px 500px at 90% 20%, rgba(25, 135, 84, .10), transparent),
+        #0b1220;
+    min-height: 100vh;
+}
+
+/* Layout */
+.app {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: 18px;
+    border-right: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px);
+}
+
+.brand-badge {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: rgba(13, 110, 253, .18);
+    border: 1px solid rgba(13, 110, 253, .35);
+    color: white;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+.nav-pill {
+    color: rgba(255, 255, 255, .78);
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-pill:hover {
+    background: rgba(255, 255, 255, .07);
+    color: #fff;
+}
+
+.nav-pill.active {
+    background: rgba(13, 110, 253, .18);
+    border: 1px solid rgba(13, 110, 253, .25);
+    color: #fff;
+}
+
+/* Content */
+.content {
+    padding: 22px;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    color: #fff;
+}
+
+.muted {
+    color: rgba(255, 255, 255, .72);
+}
+
+.small-note {
+    color: rgba(255, 255, 255, .60);
+}
+
+.form-control,
+.form-select {
+    background: rgba(255, 255, 255, .06);
+    border-color: rgba(255, 255, 255, .18);
+    color: #fff;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background: rgba(255, 255, 255, .08);
+    color: #fff;
+    border-color: rgba(13, 110, 253, .6);
+    box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .15);
+}
+
+.table thead th {
+    color: #000000bf;
+    border-color: #00000026;
+}
+
+.table tbody td {
+    color: rgba(6, 0, 53, 0.9);
+    border-color: rgba(255, 255, 255, .10);
+}
+
+table {
+        background-color: #0c01a1;
+}
+
+/* Mobile */
+@media (max-width: 992px) {
+    .app {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        height: auto;
+        position: relative;
+    }
+}
