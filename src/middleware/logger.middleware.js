@@ -7,9 +7,12 @@ app.use(morgan("combined"));
 
 
 function logger(req, res, next) {
-  console.log("Request Method: ", req.method);
-  console.log("Request URL: ", req.url);
-  // console.log("Status Code: ", res.status());
+  res.on('finish', () => {
+    console.log("Request Method:", req.method);
+    console.log("Request URL:", req.url);
+    console.log("Status Code:", res.statusCode);
+  });
+
   next();
 }
 
