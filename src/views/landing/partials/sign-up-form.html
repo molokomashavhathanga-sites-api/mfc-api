@@ -105,7 +105,7 @@
                     />
                     <label for="password">Password</label>
                     <button class="btn btn-outline-light" type="button" id="togglePw">
-                      <i class="fa-regular fa-eye"></i>
+                      Show
                     </button>
                     <div class="invalid-feedback">Password must be at least 8 characters.</div>
                   </div>
@@ -130,7 +130,7 @@
                     />
                     <label for="confirmPassword">Confirm password</label>
                     <button class="btn btn-outline-light" type="button" id="togglePw2">
-                      <i class="fa-regular fa-eye"></i>
+                      Show
                     </button>
                     <div class="invalid-feedback" id="confirmFeedback">
                       Please confirm your password.
@@ -218,7 +218,7 @@
         btn.addEventListener("click", () => {
           const isPw = input.type === "password";
           input.type = isPw ? "text" : "password";
-          btn.textContent = isPw ? "Hide" : "👁";
+          btn.textContent = isPw ? "Hide" : "Show";
         });
       }
       setupToggle("password", "togglePw");

@@ -24,6 +24,8 @@ app.use(logger);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.set("views", path.join(__dirname, "views"));
+
 // serve /assets
 app.use("/assets", express.static(path.join(__dirname, "views", "assets")));
 

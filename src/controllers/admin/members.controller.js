@@ -1,9 +1,9 @@
-import { db } from "../config/db.js";
+import { db } from "../../config/db.js";
 
 export const getMembers = async (req, res) => {
   try {
     const result = await db.query(`
-      SELECT id, firstname, lastname, email, phone, tier, joindate
+      SELECT id, firstname, lastname, email, phone, tier, to_char(joindate, 'YYYY-MM-DD') AS joindate
       FROM public.users
       ORDER BY id ASC
     `);
@@ -16,7 +16,9 @@ export const getMembers = async (req, res) => {
 
 export const createMember = async (req, res) => {
   try {
-    const { firstname, lastname, email, phone, tier } = req.body;
+
+
+    const { firstname, lastname, email, phone, tier, joindate } = req.body;
 
     if (!firstname || !lastname || !email || !phone) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -26,10 +28,11 @@ export const createMember = async (req, res) => {
     const safeTier = allowed.includes(tier) ? tier : "Bronze";
 
     const result = await db.query(
-      `INSERT INTO public.users (firstname, lastname, email, phone, tier)
-       VALUES ($1, $2, $3, $4, $5)
-       RETURNING id, firstname, lastname, email, phone, tier, joindate`,
-      [firstname, lastname, email, phone, safeTier]
+      `INSERT INTO public.users (firstname, lastname, email, phone, tier, joindate)
+       VALUES ($1, $2, $3, $4, $5 ,COALESCE($6::date, CURRENT_DATE))
+       RETURNING id, firstname, lastname, email, phone, tier, 
+        to_char(joindate, 'YYYY-MM-DD') AS joindate`,
+      [firstname, lastname, email, phone, safeTier, joindate]
     );
 
     return res.status(201).json(result.rows[0]);
