@@ -15,7 +15,7 @@ async function loadMembers() {
       email: u.email,
       phone: u.phone,
       tier: u.tier || "Bronze",           
-      joinDate: (u.joindate || "").toString().slice(0, 10), // "YYYY-MM-DD"
+      joindate: u.joindate,
     }));
 
     renderTable(); // <-- this is your real render function
@@ -80,8 +80,9 @@ function renderTable() {
   tbody.innerHTML = list.map(m => `
           <tr>
             <td>
-              <div class="fw-semibold text-white">${escapeHtml(m.firstName)} ${escapeHtml(m.lastName)}</div>
-              <div class="small-note">ID: ${escapeHtml(m.id.slice(0, 8))}...</div>
+              <div class="fw-semibold text-dark">
+              ${escapeHtml(m.firstName)} ${escapeHtml(m.lastName)}
+              </div>
             </td>
             <td>${escapeHtml(m.email)}</td>
             <td>${escapeHtml(m.phone)}</td>
@@ -90,9 +91,9 @@ function renderTable() {
                 ${escapeHtml(m.tier)}
               </span>
             </td>
-            <td>${escapeHtml(m.joinDate)}</td>
+            <td>${escapeHtml(m.joindate)}</td>
             <td class="text-end">
-              <button class="btn btn-sm btn-outline-light" onclick="editMember('${m.id}')">Edit</button>
+              <button class="btn btn-sm btn-outline-secondary" onclick="editMember('${m.id}')">Edit</button>
               <button class="btn btn-sm btn-outline-danger ms-1" onclick="deleteMember('${m.id}')">Delete</button>
             </td>
           </tr>
@@ -168,12 +169,16 @@ addMemberForm.addEventListener("submit", async (e) => {
       email: document.getElementById("email").value.trim(),
       phone: document.getElementById("phone").value.trim(),
       tier: document.getElementById("tier").value,
+    
     };
+
+    const joindate = document.getElementById("joindate").value;
+   
 
     const res = await fetch("/api/members", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(payload, joindate),
     });
 
     const data = await res.json().catch(() => ({}));
@@ -192,7 +197,7 @@ addMemberForm.addEventListener("submit", async (e) => {
       email: data.email,
       phone: data.phone,
       tier: data.tier || "Bronze",
-      joinDate: new Date(data.joindate).toISOString().slice(0, 10)
+      joindate: data.joindate
     };
 
     members.unshift(newMember);

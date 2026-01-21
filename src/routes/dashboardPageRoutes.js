@@ -1,13 +1,20 @@
-import { viewDashboard } from "../controllers/dashboard/dashboardController.js";
-import { viewEditProfile, viewMemberActivities, viewMemberBlling, viewMemberNutrition, viewMemberPersonalDetails, viewMemberPortal, viewMemberReports } from "../controllers/dashboard/member/member.controller.js";
 
 import express from "express";
+
+import { viewDashboard } from "../controllers/admin/dashboardController.js";
+import { viewMemberPortal } from "../controllers/member/portal.controller.js";
+import { viewMemberActivities } from "../controllers/member/activities.controller.js";
+import { viewMemberNutrition } from "../controllers/member/nutrition.controller.js";
+import { viewMemberPersonalDetails } from "../controllers/member/personalDetails.controller.js";
+import { viewEditProfile } from "../controllers/member/editProfile.controller.js";
+import { viewMemberBlling } from "../controllers/member/billing.controller.js";
+import { viewMemberReports } from "../controllers/member/reports.controller.js";
 
 const router = express.Router();
 
 // admin dashboard
 
-router.get("/admin-dashboard", viewDashboard);
+router.get("/admin/dashboard", viewDashboard);
 
 // member dashboard/portals
 
